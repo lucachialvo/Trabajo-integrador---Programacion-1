@@ -1,0 +1,51 @@
+nombre,poblacion,superficie,continente
+Argentina,46000000,2780400,América
+Brasil,203000000,8515767,América
+Chile,19600000,756102,América
+Uruguay,3500000,176215,América
+Paraguay,6800000,406752,América
+Bolivia,12300000,1098581,América
+Perú,34000000,1285216,América
+Colombia,52000000,1141748,América
+Venezuela,28000000,916445,América
+Ecuador,18000000,283561,América
+México,129000000,1964375,América
+Estados Unidos,340000000,9833517,América
+Canadá,41000000,9984670,América
+Cuba,11000000,109884,América
+Guatemala,18000000,108889,América
+España,49000000,505990,Europa
+Francia,68000000,551695,Europa
+Alemania,84000000,357588,Europa
+Italia,59000000,301340,Europa
+Portugal,10300000,92212,Europa
+Reino Unido,69000000,243610,Europa
+Países Bajos,18000000,41543,Europa
+Bélgica,11800000,30528,Europa
+Suiza,8900000,41285,Europa
+Suecia,10600000,450295,Europa
+Noruega,5500000,385207,Europa
+Finlandia,5600000,338455,Europa
+Polonia,38000000,312696,Europa
+Ucrania,37000000,603628,Europa
+Rusia,144000000,17098242,Asia
+China,1410000000,9596961,Asia
+India,1430000000,3287263,Asia
+Japón,124000000,377975,Asia
+Corea del Sur,52000000,100210,Asia
+Indonesia,277000000,1904569,Asia
+Arabia Saudita,36000000,2149690,Asia
+Turquía,86000000,783562,Asia
+Tailandia,71000000,513120,Asia
+Vietnam,100000000,331212,Asia
+Filipinas,117000000,300000,Asia
+Egipto,112000000,1002450,África
+Nigeria,223000000,923768,África
+Sudáfrica,62000000,1221037,África
+Kenia,55000000,580367,África
+Marruecos,38000000,446550,África
+Argelia,45000000,2381741,África
+Australia,27000000,7692024,Oceanía
+Nueva Zelanda,5300000,268838,Oceanía
+Papúa Nueva Guinea,10000000,462840,Oceanía
+Fiyi,930000,18274,Oceanía
