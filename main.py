@@ -1,14 +1,16 @@
+# Funciones
+
 # Agregar un pais al dataset con todos los datos
 
-# Actualizar datos de poblacion y superficie de UN pais
+# Actualizar datos de poblacion y superficie de UN pais -> Nacho
 
-# buscar pais por nombre (coincidencia parcial o exacta)
+# Buscar pais por nombre (coincidencia parcial o exacta) -> Nacho
 
-# filtrar paises por 1) continente, 2) rango poblacion, 3) rango superficie
+# Filtrar paises por 1) continente, 2) rango poblacion, 3) rango superficie -> Nacho
 
-# ordenar paises por: 1) nombre, 2) poblacion, 3) superficie (ascendente y descendente)
+# Ordenar paises por: 1) nombre, 2) poblacion, 3) superficie (ascendente y descendente)
 
-# mostrar estadisticas:
+# Mostrar estadisticas:
 #   - pais con mayor y menor poblacion
 #   - promedio de poblacion
 #   - promedio de superficie
