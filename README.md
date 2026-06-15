@@ -338,8 +338,8 @@ normalize_continent("asia")          # "Asia"
 
 ## Integrantes
 
-* Nombre Apellido
-* Nombre Apellido
+* **Luca** — Creación del repositorio e implementación de estructura básica. Encargado de las funcionalidades de agregar país, ordenar países y mostrar estadísticas.
+* **Ignacio** — Encargado de las funcionalidades de actualizar país, buscar país por nombre y filtrar países. Actualización del README.md y reorganización del código en tres archivos .py.
 
 ---
 
