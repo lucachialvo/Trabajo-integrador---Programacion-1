@@ -5,6 +5,11 @@ import unicodedata
 DATASET_FILE = "dataset.csv"
 
 
+# =============================================================================
+# SECCIÓN 1: Funciones auxiliares de dataset (lectura/escritura)
+# =============================================================================
+
+
 def leer_dataset(archivo=DATASET_FILE):
     """Carga el dataset de países desde un archivo CSV."""
     paises = []
@@ -38,6 +43,11 @@ def guardar_dataset(paises, archivo=DATASET_FILE):
             })
 
 
+# =============================================================================
+# SECCIÓN 2: Funciones auxiliares de validación y normalización
+# =============================================================================
+
+
 def validar_entero(valor, nombre_campo):
     """Convierte un valor a entero o lanza ValueError con mensaje claro."""
     valor = valor.strip()
@@ -46,6 +56,14 @@ def validar_entero(valor, nombre_campo):
     if not valor.isdigit():
         raise ValueError(f"{nombre_campo} debe ser un número entero válido.")
     return int(valor)
+
+
+def strip_accents(text):
+    """Elimina acentos/tildes de un texto para comparaciones insensibles a diacríticos."""
+    if not text:
+        return text
+    nfkd = unicodedata.normalize('NFD', text)
+    return ''.join([c for c in nfkd if not unicodedata.combining(c)])
 
 
 def normalize_text(text):
@@ -62,7 +80,6 @@ def normalize_text(text):
         if part in " -'":
             normalized_parts.append(part)
         else:
-            # capitalize preserves unicode correctly when using lower()/upper()
             normalized_parts.append(part[0].upper() + part[1:].lower() if len(part) > 0 else part)
     return "".join(normalized_parts)
 
@@ -73,7 +90,6 @@ def validar_formato_nombre(nombre):
     """
     if not nombre:
         return False
-    # Permitir letras unicode, espacios, guiones y apóstrofes
     for ch in nombre:
         if not (ch.isalpha() or ch in " -'"):
             return False
@@ -94,21 +110,12 @@ def validar_formato_continente(continente):
     return validar_formato_nombre(continente)
 
 
-def strip_accents(text):
-    """Elimina acentos/tildes de un texto para comparaciones insensibles a diacríticos."""
-    if not text:
-        return text
-    nfkd = unicodedata.normalize('NFD', text)
-    return ''.join([c for c in nfkd if not unicodedata.combining(c)])
-
-
 def normalize_continent(continente):
     """Normaliza variantes de nombre de continente a la forma canónica con tildes.
 
     Maneja entradas como 'america', 'AMERICA', 'america del sur', etc. devolviendo 'América'.
     """
     clave = strip_accents(continente).lower()
-    # Mapear por presencia de palabras clave
     if 'america' in clave:
         return 'América'
     if 'africa' in clave:
@@ -121,8 +128,87 @@ def normalize_continent(continente):
         return 'Asia'
     if 'antart' in clave:
         return 'Antártida'
-    # Si no se reconoce, devolver la versión normalizada tal cual
     return continente
+
+
+# =============================================================================
+# SECCIÓN 3: Funciones auxiliares de ordenamiento
+# =============================================================================
+
+
+def get_nombre_key(pais):
+    return pais["nombre"].lower()
+
+
+def get_poblacion_key(pais):
+    return pais["poblacion"]
+
+
+def get_superficie_key(pais):
+    return pais["superficie"]
+
+
+def ordenar_paises(paises, criterio, descendente=False):
+    """Devuelve una lista de países ordenados por el criterio especificado."""
+    if criterio not in {"nombre", "poblacion", "superficie"}:
+        raise ValueError("Criterio de orden no válido.")
+    if criterio == "nombre":
+        return sorted(paises, key=get_nombre_key, reverse=descendente)
+    if criterio == "poblacion":
+        return sorted(paises, key=get_poblacion_key, reverse=descendente)
+    return sorted(paises, key=get_superficie_key, reverse=descendente)
+
+
+def ordenar_por_nombre(paises, descendente=False):
+    return ordenar_paises(paises, "nombre", descendente)
+
+
+def ordenar_por_poblacion(paises, descendente=False):
+    return ordenar_paises(paises, "poblacion", descendente)
+
+
+def ordenar_por_superficie(paises, descendente=False):
+    return ordenar_paises(paises, "superficie", descendente)
+
+
+# =============================================================================
+# SECCIÓN 4: Funciones auxiliares de visualización
+# =============================================================================
+
+
+def imprimir_paises(paises):
+    """Imprime una lista de países en formato tabular simple."""
+    if not paises:
+        print("No hay países para mostrar.")
+        return
+
+    print(f"{'Nombre':<25} {'Población':>12} {'Superficie':>12} {'Continente':>15}")
+    print("-" * 70)
+    for pais in paises:
+        print(f"{pais['nombre']:<25} {pais['poblacion']:>12} {pais['superficie']:>12} {pais['continente']:>15}")
+
+
+def mostrar_estadisticas(paises):
+    """Muestra estadísticas del dataset de países."""
+    if not paises:
+        print("No hay datos de países para mostrar estadísticas.")
+        return
+
+    mayor_poblacion = max(paises, key=get_poblacion_key)
+    menor_poblacion = min(paises, key=get_poblacion_key)
+    promedio_poblacion = sum(get_poblacion_key(p) for p in paises) / len(paises)
+    promedio_superficie = sum(get_superficie_key(p) for p in paises) / len(paises)
+
+    print("Estadísticas del dataset de países:")
+    print(f"- País con mayor población: {mayor_poblacion['nombre']} ({mayor_poblacion['poblacion']})")
+    print(f"- País con menor población: {menor_poblacion['nombre']} ({menor_poblacion['poblacion']})")
+    print(f"- Promedio de población: {promedio_poblacion:.2f}")
+    print(f"- Promedio de superficie: {promedio_superficie:.2f}")
+
+
+# =============================================================================
+# SECCIÓN 5: Funciones del menú principal
+# =============================================================================
 
 
 def agregar_pais():
@@ -156,7 +242,6 @@ def agregar_pais():
         if not continente:
             raise ValueError("El continente es obligatorio.")
 
-        # Normalizar continente a forma canónica (con tildes cuando corresponda)
         continente = normalize_continent(continente)
 
         if not validar_formato_continente(continente):
@@ -175,75 +260,9 @@ def agregar_pais():
     print(f"País '{nombre}' agregado correctamente.")
 
 
-def ordenar_paises(paises, criterio, descendente=False):
-    """Devuelve una lista de países ordenados por el criterio especificado."""
-    if criterio not in {"nombre", "poblacion", "superficie"}:
-        raise ValueError("Criterio de orden no válido.")
-    if criterio == "nombre":
-        return sorted(paises, key=get_nombre_key, reverse=descendente)
-    if criterio == "poblacion":
-        return sorted(paises, key=get_poblacion_key, reverse=descendente)
-    return sorted(paises, key=get_superficie_key, reverse=descendente)
-
-
-def get_nombre_key(pais):
-    return pais["nombre"].lower()
-
-
-def get_poblacion_key(pais):
-    return pais["poblacion"]
-
-
-def get_superficie_key(pais):
-    return pais["superficie"]
-
-
-def ordenar_por_nombre(paises, descendente=False):
-    return ordenar_paises(paises, "nombre", descendente)
-
-
-def ordenar_por_poblacion(paises, descendente=False):
-    return ordenar_paises(paises, "poblacion", descendente)
-
-
-def ordenar_por_superficie(paises, descendente=False):
-    return ordenar_paises(paises, "superficie", descendente)
-
-
-def mostrar_estadisticas(paises):
-    """Muestra estadísticas del dataset de países."""
-    if not paises:
-        print("No hay datos de países para mostrar estadísticas.")
-        return
-
-    mayor_poblacion = max(paises, key=get_poblacion_key)
-    menor_poblacion = min(paises, key=get_poblacion_key)
-    promedio_poblacion = sum(get_poblacion_key(p) for p in paises) / len(paises)
-    promedio_superficie = sum(get_superficie_key(p) for p in paises) / len(paises)
-
-    print("Estadísticas del dataset de países:")
-    print(f"- País con mayor población: {mayor_poblacion['nombre']} ({mayor_poblacion['poblacion']})")
-    print(f"- País con menor población: {menor_poblacion['nombre']} ({menor_poblacion['poblacion']})")
-    print(f"- Promedio de población: {promedio_poblacion:.2f}")
-    print(f"- Promedio de superficie: {promedio_superficie:.2f}")
-
-
-def imprimir_paises(paises):
-    """Imprime una lista de países en formato tabular simple."""
-    if not paises:
-        print("No hay países para mostrar.")
-        return
-
-    print(f"{'Nombre':<25} {'Población':>12} {'Superficie':>12} {'Continente':>15}")
-    print("-" * 70)
-    for pais in paises:
-        print(f"{pais['nombre']:<25} {pais['poblacion']:>12} {pais['superficie']:>12} {pais['continente']:>15}")
-
-
-def main():
-    paises = leer_dataset()
-    while True:
-        print("""\nMenú de opciones:
+def mostrar_menu():
+    """Imprime el menú de opciones."""
+    print("""\nMenú de opciones:
 1. Agregar país
 2. Ordenar por nombre ascendente
 3. Ordenar por nombre descendente
@@ -253,6 +272,12 @@ def main():
 7. Ordenar por superficie descendente
 8. Mostrar estadísticas
 0. Salir""")
+
+
+def main():
+    paises = leer_dataset()
+    while True:
+        mostrar_menu()
         opcion = input("Seleccione una opción: ").strip()
         match opcion:
             case "1":
