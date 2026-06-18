@@ -1,4 +1,12 @@
 # Sistema de Gestión de Países
+---
+
+## Integrantes
+
+* **Luca** — Creación del repositorio e implementación de estructura básica. Encargado de las funcionalidades de agregar país, ordenar países y mostrar estadísticas.
+* **Ignacio** — Encargado de las funcionalidades de actualizar país, buscar país por nombre y filtrar países. Actualización del README.md y reorganización del código en tres archivos .py.
+
+---
 
 ## Descripción
 
@@ -10,6 +18,12 @@ Link al video explicativo: https://youtu.be/Q4xKmF_guaQ
 
 ---
 
+## Materia
+
+**Programación 1**
+
+Trabajo Integrador Final.
+
 ## Objetivos
 
 * Implementar estructuras de datos utilizando listas y diccionarios.
@@ -18,6 +32,17 @@ Link al video explicativo: https://youtu.be/Q4xKmF_guaQ
 * Aplicar técnicas de búsqueda, filtrado y ordenamiento.
 * Generar estadísticas básicas a partir de los datos almacenados.
 * Validar entradas y manejar errores comunes de ejecución.
+
+---
+
+## Estructura general del programa
+
+1. Carga de datos desde archivo CSV.
+2. Presentación del menú principal.
+3. Selección de operaciones por parte del usuario.
+4. Procesamiento de información.
+5. Visualización de resultados.
+6. Actualización de datos cuando corresponde.
 
 ---
 
@@ -324,29 +349,3 @@ normalize_continent("asia")          # "Asia"
 * Funciones
 * Estructuras condicionales
 * Estructuras repetitivas
-
----
-
-## Estructura general del programa
-
-1. Carga de datos desde archivo CSV.
-2. Presentación del menú principal.
-3. Selección de operaciones por parte del usuario.
-4. Procesamiento de información.
-5. Visualización de resultados.
-6. Actualización de datos cuando corresponde.
-
----
-
-## Integrantes
-
-* **Luca** — Creación del repositorio e implementación de estructura básica. Encargado de las funcionalidades de agregar país, ordenar países y mostrar estadísticas.
-* **Ignacio** — Encargado de las funcionalidades de actualizar país, buscar país por nombre y filtrar países. Actualización del README.md y reorganización del código en tres archivos .py.
-
----
-
-## Materia
-
-**Programación 1**
-
-Trabajo Integrador Final.
