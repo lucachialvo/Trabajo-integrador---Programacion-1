@@ -1,12 +1,10 @@
 # Sistema de Gestión de Países
----
 
 ## Integrantes
 
 * **Luca** — Creación del repositorio e implementación de estructura básica. Encargado de las funcionalidades de agregar país, ordenar países y mostrar estadísticas.
 * **Ignacio** — Encargado de las funcionalidades de actualizar país, buscar país por nombre y filtrar países. Actualización del README.md y reorganización del código en tres archivos .py.
 
----
 
 ## Descripción
 
@@ -16,7 +14,6 @@ El sistema funciona mediante un menú interactivo en consola que permite realiza
 
 Link al video explicativo: https://youtu.be/Q4xKmF_guaQ
 
----
 
 ## Materia
 
@@ -33,7 +30,6 @@ Trabajo Integrador Final.
 * Generar estadísticas básicas a partir de los datos almacenados.
 * Validar entradas y manejar errores comunes de ejecución.
 
----
 
 ## Estructura general del programa
 
@@ -44,7 +40,6 @@ Trabajo Integrador Final.
 5. Visualización de resultados.
 6. Actualización de datos cuando corresponde.
 
----
 
 ## Datos gestionados
 
@@ -67,7 +62,6 @@ Brasil,213993437,8515767,América
 Alemania,83149300,357022,Europa
 ```
 
----
 
 ## Funcionalidades
 
@@ -98,7 +92,6 @@ Alemania,83149300,357022,Europa
 * Promedio de superficie.
 * Cantidad de países por continente.
 
----
 
 ## Arquitectura del código
 
@@ -177,7 +170,6 @@ Cada registro se representa internamente como un diccionario:
 }
 ```
 
----
 
 ## Ejemplos de uso
 
