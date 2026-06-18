@@ -6,6 +6,8 @@ Este proyecto fue desarrollado como Trabajo Integrador Final de Programación 1 
 
 El sistema funciona mediante un menú interactivo en consola que permite realizar operaciones de consulta, modificación y análisis sobre un conjunto de datos de países.
 
+Link al video explicativo: https://youtu.be/Q4xKmF_guaQ
+
 ---
 
 ## Objetivos
